@@ -1,6 +1,7 @@
 package com.eryndor.backend.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "characters")
@@ -12,14 +13,17 @@ public class Character {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String race;
+    @ManyToOne
+    @JoinColumn(name = "race_id", nullable = false)
+    private Race race;
 
-    @Column(nullable = false)
-    private String characterClass;
+    @ManyToOne
+    @JoinColumn(name = "character_class_id", nullable = false)
+    private CharacterClass characterClass;
 
     private int level = 1;
     private int xp = 0;
+    private int xpToNextLevel =100;
 
     private int strength = 10;
     private int dexterity = 10;
@@ -33,6 +37,15 @@ public class Character {
     private int maxMp = 0;
     private int currentMp = 0;
 
+    @Column(columnDefinition = "TEXT")
+    private String skills; // JSON com perícias e proficiências
+
+    @Column(columnDefinition = "TEXT")
+    private String inventory; // JSON com equipamentos e itens
+
+    @Column(columnDefinition = "TEXT")
+    private String knownSpells; // JSON com magias conhecidas
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
@@ -43,17 +56,20 @@ public class Character {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getRace() { return race; }
-    public void setRace(String race) { this.race = race; }
+    public Race getRace() { return race; }
+    public void setRace(Race race) { this.race = race; }
 
-    public String getCharacterClass() { return characterClass; }
-    public void setCharacterClass(String characterClass) { this.characterClass = characterClass; }
+    public CharacterClass getCharacterClass() { return characterClass; }
+    public void setCharacterClass(CharacterClass characterClass) { this.characterClass = characterClass; }
 
     public int getLevel() { return level; }
     public void setLevel(int level) { this.level = level; }
 
     public int getXp() { return xp; }
     public void setXp(int xp) { this.xp = xp; }
+
+    public int getXpToNextLevel() { return xpToNextLevel; }
+    public void setXpToNextLevel(int xpToNextLevel) { this.xpToNextLevel = xpToNextLevel; }
 
     public int getStrength() { return strength; }
     public void setStrength(int strength) { this.strength = strength; }
@@ -84,6 +100,15 @@ public class Character {
 
     public int getCurrentMp() { return currentMp; }
     public void setCurrentMp(int currentMp) { this.currentMp = currentMp; }
+
+    public String getSkills() { return skills; }
+    public void setSkills(String skills) { this.skills = skills; }
+
+    public String getInventory() { return inventory; }
+    public void setInventory(String inventory) { this.inventory = inventory; }
+
+    public String getKnownSpells() { return knownSpells; }
+    public void setKnownSpells(String knownSpells) { this.knownSpells = knownSpells; }
 
     public User getOwner() { return owner; }
     public void setOwner(User owner) { this.owner = owner; }
