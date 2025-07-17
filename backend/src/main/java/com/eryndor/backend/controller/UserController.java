@@ -16,7 +16,6 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        // Aqui você pode adicionar validação e hash de senha futuramente
         User saved = userService.saveUser(user);
         return ResponseEntity.ok(saved);
     }
@@ -31,5 +30,15 @@ public class UserController {
     public ResponseEntity<User> getByEmail(@PathVariable String email) {
         Optional<User> user = userService.findByEmail(email);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/by-username/{username}")
+    public ResponseEntity<String> deleteByUsername(@PathVariable String username) {
+        Optional<User> user = userService.findByUsername(username);
+        if (user.isPresent()) {
+            userService.deleteUser(user.get().getId());
+            return ResponseEntity.ok("Usuário removido com sucesso");
+        }
+        return ResponseEntity.notFound().build();
     }
 } 

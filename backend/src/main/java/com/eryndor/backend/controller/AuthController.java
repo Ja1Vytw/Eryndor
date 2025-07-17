@@ -24,7 +24,6 @@ public class AuthController {
         if (userOpt.isPresent()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             if (encoder.matches(password, userOpt.get().getPasswordHash())) {
-                // Aqui futuramente retornaremos o JWT
                 return ResponseEntity.ok("Login realizado com sucesso!");
             }
         }
