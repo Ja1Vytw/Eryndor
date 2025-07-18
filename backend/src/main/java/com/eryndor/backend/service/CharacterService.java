@@ -22,6 +22,10 @@ public class CharacterService {
         return characterRepository.findByOwner(owner);
     }
 
+    public List<Character> findAll() {
+        return characterRepository.findAll();
+    }
+
     public Optional<Character> findByNameAndOwner(String name, User owner) {
         return characterRepository.findByNameAndOwner(name, owner);
     }

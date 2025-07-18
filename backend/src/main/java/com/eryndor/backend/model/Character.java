@@ -13,17 +13,17 @@ public class Character {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "character_class_id", nullable = false)
     private CharacterClass characterClass;
 
     private int level = 1;
     private int xp = 0;
-    private int xpToNextLevel =100;
+    private int xpToNextLevel = 100;
 
     private int strength = 10;
     private int dexterity = 10;
@@ -46,7 +46,7 @@ public class Character {
     @Column(columnDefinition = "TEXT")
     private String knownSpells; // JSON com magias conhecidas
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
 

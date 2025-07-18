@@ -29,10 +29,10 @@ public class DiceService {
     }
 
     public int rollD20() {
-        return random.nextInt(20);
+        return random.nextInt(20) + 1;
     }
 
-    public int rollD20ifier(int modifier) {
+    public int rollD20WithModifier(int modifier) {
         return rollD20() + modifier;
     }
 

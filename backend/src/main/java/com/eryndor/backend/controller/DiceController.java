@@ -32,18 +32,24 @@ public class DiceController {
     }
 
     @PostMapping("/d20")
-    public ResponseEntity<Map<String, Object>> rollD20(@RequestParam(defaultValue = 0) int modifier) {
+    public ResponseEntity<Map<String, Object>> rollD20(@RequestParam(defaultValue = "0") String modifier) {
         Map<String, Object> response = new HashMap<>();
         
-        int result = diceService.rollD20WithModifier(modifier);
-        boolean isCritical = diceService.isCriticalHit(result);
-        boolean isFailure = diceService.isCriticalFailure(result);
-        
-        response.put("roll", result);
-        response.put("modifier", modifier);
-        response.put("total", result);
-        response.put("critical", isCritical);
-        response.put("failure", isFailure);
+        try {
+            int modifierValue = Integer.parseInt(modifier);
+            int result = diceService.rollD20WithModifier(modifierValue);
+            boolean isCritical = diceService.isCriticalHit(result);
+            boolean isFailure = diceService.isCriticalFailure(result);
+            
+            response.put("roll", result);
+            response.put("modifier", modifierValue);
+            response.put("total", result);
+            response.put("critical", isCritical);
+            response.put("failure", isFailure);
+        } catch (NumberFormatException e) {
+            response.put("success", false);
+            response.put("error", "Modificador inválido: " + modifier);
+        }
         
         return ResponseEntity.ok(response);
     }
@@ -73,13 +79,19 @@ public class DiceController {
     @PostMapping("/damage")
     public ResponseEntity<Map<String, Object>> calculateDamage(
             @RequestParam String formula,
-            @RequestParam(defaultValue = 0) int modifier) {
+            @RequestParam(defaultValue = "0") String modifier) {
         Map<String, Object> response = new HashMap<>();
         
-        int damage = diceService.calculateDamage(formula, modifier);
-        response.put("formula", formula);
-        response.put("modifier", modifier);
-        response.put("damage", damage);
+        try {
+            int modifierValue = Integer.parseInt(modifier);
+            int damage = diceService.calculateDamage(formula, modifierValue);
+            response.put("formula", formula);
+            response.put("modifier", modifierValue);
+            response.put("damage", damage);
+        } catch (NumberFormatException e) {
+            response.put("success", false);
+            response.put("error", "Modificador inválido: " + modifier);
+        }
         
         return ResponseEntity.ok(response);
     }

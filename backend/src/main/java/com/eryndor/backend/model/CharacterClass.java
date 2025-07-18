@@ -30,6 +30,12 @@ public class CharacterClass {
     @Column(columnDefinition = "TEXT")
     private String specialPassive;
 
+    @Column(columnDefinition = "TEXT")
+    private String features;
+
+    @Column(columnDefinition = "TEXT")
+    private String primaryAttributes;
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -65,4 +71,10 @@ public class CharacterClass {
 
     public String getSpecialPassive() { return specialPassive; }
     public void setSpecialPassive(String specialPassive) { this.specialPassive = specialPassive; }
+
+    public String getFeatures() { return features; }
+    public void setFeatures(String features) { this.features = features; }
+
+    public String getPrimaryAttributes() { return primaryAttributes; }
+    public void setPrimaryAttributes(String primaryAttributes) { this.primaryAttributes = primaryAttributes; }
 } 

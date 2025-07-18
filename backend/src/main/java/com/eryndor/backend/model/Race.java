@@ -28,6 +28,12 @@ public class Race {
     @Column(columnDefinition = "TEXT")
     private String passiveAbility;
 
+    @Column(columnDefinition = "TEXT")
+    private String attributes;
+
+    @Column(columnDefinition = "TEXT")
+    private String traits;
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -60,4 +66,10 @@ public class Race {
 
     public String getPassiveAbility() { return passiveAbility; }
     public void setPassiveAbility(String passiveAbility) { this.passiveAbility = passiveAbility; }
+
+    public String getAttributes() { return attributes; }
+    public void setAttributes(String attributes) { this.attributes = attributes; }
+
+    public String getTraits() { return traits; }
+    public void setTraits(String traits) { this.traits = traits; }
 } 

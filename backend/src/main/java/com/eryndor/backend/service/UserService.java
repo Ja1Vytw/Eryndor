@@ -14,8 +14,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public User saveUser(User user) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPasswordHash(encoder.encode(user.getPasswordHash()));
         return userRepository.save(user);
     }
 

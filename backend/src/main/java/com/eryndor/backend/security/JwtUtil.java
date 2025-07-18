@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413428472B6256453675665970";
-    private static final long EXPIRATION_TIME = 86400; // 24 horas
+    private static final long EXPIRATION_TIME = 86400000; // 24 horas em milissegundos
 
     private Key getSigningKey() {
         byte[] keyBytes = SECRET_KEY.getBytes();
